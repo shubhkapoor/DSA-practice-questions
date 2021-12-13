@@ -1,28 +1,18 @@
 /*        Sort a stack 
 
-You are given N elements and your task is to Implement a Stack in which you can get minimum element in O(1) time.
+Given a stack, the task is to sort it such that the top of the stack has the greatest element.
 
 Example 1:
 
 Input:
-push(2)
-push(3)
-pop()
-getMin()
-push(1)
-getMin()
-
+Stack: 3 2 1
 Output: 3 2 1
 
-Explanation: In the first test case for
-query 
-push(2)  the stack will be {2}
-push(3)  the stack will be {2 3}
-pop()    poped element will be 3 the
-         stack will be {2}
-getMin() min element will be 2 
-push(1)  the stack will be {2 1}
-getMin() min element will be 1
+Example 2:
+
+Input:
+Stack: 11 2 32 3 41
+Output: 41 32 11 3 2
 
 */
 
