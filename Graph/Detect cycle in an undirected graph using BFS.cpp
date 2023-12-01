@@ -6,25 +6,33 @@ https://practice.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/
 
 class Solution {
   private:
-    
-    bool detectCycle(int node , int parent , int vis[] , vector<int> adj[])
+  
+    bool detectCycle(int src , vector<int> adj[] , int vis[])
     {
-        vis[node] = 1;
+        vis[src] = 1;
         
-        for(auto adjnode : adj[node])
+        // {node , parentNode}
+        queue<pair<int,int>> q;
+        q.push({src,-1});
+        
+        while(!q.empty())
         {
-            if(!vis[adjnode])
+            int node = q.front().first;
+            int parent = q.front().second;
+            
+            q.pop();
+            
+            for(auto adjNode : adj[node])
             {
-                vis[adjnode] = 1;
-                
-                if(detectCycle(adjnode , node , vis , adj))
+                if(!vis[adjNode])
+                {
+                    vis[adjNode] = 1;
+                    q.push({adjNode,node});
+                }
+                else if(parent != adjNode)
                 {
                     return true;
                 }
-            }
-            else if(adjnode != parent)
-            {
-                return true;
             }
         }
         
@@ -38,11 +46,11 @@ class Solution {
         
         int vis[V] = {0};
         
-        for(int i=0 ; i<V; i++)
+        for(int i=0 ; i<V ; i++)
         {
             if(!vis[i])
             {
-                if(detectCycle(i , -1 , vis , adj))
+                if(detectCycle(i , adj , vis))
                 {
                     return true;
                 }
