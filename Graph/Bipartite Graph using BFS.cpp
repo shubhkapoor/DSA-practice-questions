@@ -7,22 +7,29 @@ https://practice.geeksforgeeks.org/problems/bipartite-graph/1?utm_source=youtube
 class Solution {
     
 private:
-    bool dfs(int node , int col , int color[] , vector<int>adj[])
+    
+    bool check(int start , int n , int color[] , vector<int>adj[])
     {
-        color[node] = col;
+        color[start] = 0;
+        queue<int> q;
+        q.push(start);
         
-        for(auto it : adj[node])
+        while(!q.empty())
         {
-            if(color[it] == -1)
+            int node = q.front();
+            q.pop();
+            
+            for(auto it : adj[node])
             {
-                if(dfs(it , !col , color , adj) == false)
+                if(color[it] == -1)
+                {
+                    color[it] = !color[node];
+                    q.push(it);
+                }
+                else if(color[it] == color[node])
                 {
                     return false;
                 }
-            }
-            else if(color[it] == color[node])
-            {
-                return false;
             }
         }
         
@@ -44,7 +51,7 @@ public:
 	    {
 	        if(color[i]==-1)
 	        {
-	            if(dfs(i,0,color,adj) == false)
+	            if(check(i , V , color , adj) == false)
 	            {
 	                return false;
 	            }
