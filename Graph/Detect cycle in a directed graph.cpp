@@ -5,55 +5,51 @@ https://practice.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1?u
 */
 
 class Solution {
+
+  private:
+    bool dfsCheck(int node , int vis[] , int pathvis[] , vector<int> adj[])
+    {
+        vis[node] = 1;
+        pathvis[node] = 1;
+        
+        for(auto it : adj[node])
+        {
+            if(!vis[it])
+            {
+                if(dfsCheck(it,vis,pathvis,adj) == true)
+                {
+                    return true;
+                }
+            }
+            else if(pathvis[it]==1)
+            {
+                return true;
+            }
+        }
+        
+        pathvis[node] = 0;
+        return false;
+    }
+    
   public:
     // Function to detect cycle in a directed graph.
     bool isCyclic(int V, vector<int> adj[]) {
         // code here
         
-        int indegree[V] = {0};
+        int vis[V] = {0};
+        int pathvis[V] = {0};
         
         for(int i=0 ; i<V ; i++)
         {
-            for(auto it : adj[i])
+            if(!vis[i])
             {
-                indegree[it]++;
-            }
-        }
-        
-        queue<int> q;
-        
-        for(int i=0 ; i<V ; i++)
-        {
-            if(indegree[i]==0)
-            {
-                q.push(i);
-            }
-        }
-        
-        int count = 0;
-        
-        while(!q.empty())
-        {
-            int node = q.front();
-            q.pop();
-            count++;
-            
-            for(auto it : adj[node])
-            {
-                indegree[it]--;
-                
-                if(indegree[it] == 0)
+                if(dfsCheck(i,vis,pathvis,adj) == true)
                 {
-                    q.push(it);
+                    return true;
                 }
             }
         }
         
-        if(count == V)
-        {
-            return false;
-        }
-        
-        return true;
+        return false;
     }
 };
