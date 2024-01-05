@@ -1,6 +1,6 @@
 /*
 
-https://practice.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=detect-cycle-in-a-directed-graph
+https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1
 
 */
 
